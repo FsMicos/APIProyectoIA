@@ -12,8 +12,6 @@ namespace APIProyecto.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetModelo(int Hora, string Circuito, string Tipo, string DiaSemana, int Mes)
         {
-            Circuito = Circuito.ToUpper();
-            // Valida el modelo
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -10,11 +10,12 @@ warnings.filterwarnings('ignore')
 #Direcciones de archivos
 script_dir = os.path.dirname(os.path.abspath(__file__))
 kmeans_model_path = os.path.join(script_dir, 'kmeans_model.pkl')
+Scaler_path= os.path.join(script_dir, 'scaler.pkl')
 label_encoders_path = os.path.join(script_dir, 'label_encoders.pkl')
 # Cargar el modelo KMeans y los LabelEncoders
 kmeans_loaded = joblib.load(kmeans_model_path)
 label_encoders = joblib.load(label_encoders_path)
-
+scaler = joblib.load(Scaler_path)
 
 # Obtener los parámetros de la línea de comandos
 if len(sys.argv) != 6:
@@ -52,6 +53,7 @@ for column in nuevos_datos.columns:
     # Aplicar la transformación a la nueva columna
     nuevos_datos[column] = le.transform(nuevos_datos[column])
 
+nuevos_datos = scaler.transform(nuevos_datos)
 # Predecir usando el modelo cargado
 predicciones = kmeans_loaded.predict(nuevos_datos)
 prediccion = predicciones[0]
