@@ -42,7 +42,7 @@ namespace APIProyecto.Controllers
                     return StatusCode(500, error);
                 }
             }
-            return Ok(result);
+            return Ok(new { Result = result });
         }
     }
 }
